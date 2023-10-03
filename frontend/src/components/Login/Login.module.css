@@ -1,0 +1,86 @@
+.centeredContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+}
+
+.cardLogin {
+  width: 300px;
+  height: auto;
+  padding: 1.9rem 1.2rem;
+  text-align: center;
+  background: #2a2b38;
+  margin: 0; /* tambahkan ini untuk menghindari margin bawaan browser */
+}
+ 
+.logo {
+  width: 250px; /* Sesuaikan lebar gambar */
+  height: auto;
+  margin-bottom: 10px; /* Tambahkan margin bawah */
+}
+
+ /*Inputs*/
+ .field {
+  margin-top: .5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5em;
+  background-color: #1f2029;
+  border-radius: 4px;
+  padding: 1em; /* Ubah padding untuk memperbesar area input */
+}
+ 
+ .inputIcon {
+  height: 1em;
+  width: 1em;
+  fill: #ffeba7;
+}
+ 
+ .inputField {
+  background: none;
+  border: none;
+  outline: none;
+  flex: 1; /* Memastikan inputField memanfaatkan semua ruang yang tersedia */
+  font-size: 1.2em; /* Ukuran teks lebih besar */
+  color: #d3d3d3;
+}
+ 
+ /*Text*/
+ .title {
+  margin-bottom: 1rem;
+  font-size: 1.5em;
+  font-weight: 500;
+  color: #ffeba7;
+ }
+ 
+ .btnLogin {
+  margin: 2rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 1em; /* Ukuran teks tombol lebih besar */
+  text-transform: uppercase;
+  padding: 1em 8em; /* Ubah padding untuk membuat tombol lebih besar */
+  background-color: #ffeba7;
+  color: #5e6681;
+  box-shadow: 0 8px 24px 0 rgb(255 235 167 / 20%);
+  transition: all .3s ease-in-out;
+  margin-left: 0%;
+}
+
+/*Hover & focus*/
+.btnLogin:hover {
+  background-color: #5e6681;
+  color: #ffeba7;
+  box-shadow: 0 8px 24px 0 rgb(16 39 112 / 20%);
+}
+
+ /*Hover & focus*/
+ .field input:focus::placeholder {
+  opacity: 0;
+  transition: opacity .3s;
+ }
+ 

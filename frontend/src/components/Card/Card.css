@@ -1,0 +1,70 @@
+.card-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Menambahkan flex-wrap untuk responsif */
+  padding: 0 10px; /* Menambahkan padding agar tampilan lebih baik di perangkat kecil */
+  max-width: 1200px;
+  margin: 250px auto; /* Mengatur margin ke tengah secara horizontal (kiri dan kanan) dan vertical (atas dan bawah) */
+}
+
+
+.card {
+  box-sizing: border-box;
+  width: calc(22% - 20px); /* Menggunakan perhitungan lebar fleksibel */
+  height: 365px;
+  background: rgba(255, 255, 255, 0.977);
+  border: 1px solid white;
+  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(6px);
+  border-radius: 17px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  font-weight: bolder;
+  color: black;
+}
+
+
+.card-hekta-image {
+  width: 190px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.card-text {
+  margin-top: 40px;
+  font-size: 20px;
+}
+
+.card:hover {
+  border: 5px solid rgb(180, 214, 111);
+  transform: scale(1.05);
+}
+
+.card:active {
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+
+.card-hekta,
+.card-siteplan,
+.card-vr,
+.card-youtube {
+  margin-top: 20px; /* Menambahkan jarak di atas kartu */
+}
+
+/* Responsif hanya pada lebar layar maksimum 768px */
+@media (max-width: 768px) {
+  .card-container {
+    justify-content: center; /* Menengahkan kartu-kartu */
+  }
+
+  .card {
+    width: 240px; /* Pertahankan ukuran kartu */
+    margin: 10px; /* Tambahkan margin di antara kartu */
+  }
+}
