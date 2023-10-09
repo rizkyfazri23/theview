@@ -23,12 +23,15 @@ const Siteplan = ({ isApplyFilter, filterData }) => {
       const queryParams = {
         filterAvailable: filterData.filterAvailable,
         filterSoldOut: filterData.filterSoldOut,
-        filter81to100: filterData.filter81to100, // Tambahkan filter progress 81-100%
-        filter41to80: filterData.filter41to80,   // Tambahkan filter progress 41-80%
-        filter0to40: filterData.filter0to40,     // Tambahkan filter progress 0-40%
+        filter81to100: filterData.filter81to100,
+        filter41to80: filterData.filter41to80,
+        filter0to40: filterData.filter0to40,
+        filter9072: filterData.filter9072, // Tambahkan filter Type 90/72
+        filter7660: filterData.filter7660, // Tambahkan filter Type 76/60
+        filter7260: filterData.filter7260, // Tambahkan filter Type 72/60
       };
   
-      console.log('Query Parameters:', queryParams); // Tambahkan ini
+      console.log('Query Parameters:', queryParams);
   
       const data = await fetchHouseData(queryParams);
       setHouseData(data);
@@ -36,6 +39,7 @@ const Siteplan = ({ isApplyFilter, filterData }) => {
       const updatedData = data.map((house) => ({
         ...house,
         statusText: house.status === 1 ? 'Available' : 'Sold Out',
+        typeText: house.type === 1 ? '72/60' : house.type === 2 ? '76/60' : '90/72',
       }));
       setHouseData(updatedData);
     };
@@ -45,10 +49,10 @@ const Siteplan = ({ isApplyFilter, filterData }) => {
   
   
 
-  const handleMarkerClick = (info, x, y, houseId, statusText) => {
-    console.log("Marker clicked:", info, x, y, houseId, statusText); // Tambahkan log ini
+  const handleMarkerClick = (info, x, y, houseId, statusText, typeText) => {
+    console.log("Marker clicked:", info, x, y, houseId, statusText, typeText); // Tambahkan log ini
     setTooltipVisible(true);
-    setHouseInfo({ id: houseId, info, statusText });
+    setHouseInfo({ id: houseId, info, statusText, typeText });
     setTooltipPosition({ x, y });
   };
 
@@ -126,6 +130,8 @@ const Siteplan = ({ isApplyFilter, filterData }) => {
         >
           <p>{replaceProgressPlaceholder(houseInfo.info, houseInfo.id)}</p>
           <p>Status: {findHouseById(houseInfo.id)?.statusText}</p>
+          <p>Type: {findHouseById(houseInfo.id)?.typeText}</p>
+
           <Link to={`/detail/${houseInfo.id}`} className="tooltip-link">
             Detail Spesifikasi
           </Link>

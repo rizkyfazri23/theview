@@ -9,6 +9,11 @@ import { useParams } from 'react-router-dom';
 import { useAuth } from './../../AuthContext'; // Import useAuth dari AuthContext
 import { fetchOneHouseData, updateHouseData, uploadImage, deleteImage } from './../../api/api'; // Ganti dengan path yang sesuai
 
+import { TextInput, FileInput, Button  } from 'flowbite-react';
+import Swal from 'sweetalert2';
+
+
+
 const Component11 = styled('div')({
   display: `flex`,
   position: `relative`,
@@ -36,30 +41,65 @@ const Component11 = styled('div')({
 //   top: `5%`,
 // });
 
-const FrameAtas = styled('div')({
-  display: `flex`,
-  position: `relative`,
-  isolation: `isolate`,
-  flexDirection: `column`,
-  justifyContent: `flex-start`,
-  alignItems: `flex-start`,
-  padding: `0px`,
-  boxSizing: `border-box`,
-  flex: `1`,
-  margin: `-80px 0px 0px 290px`,
+
+const FrameContainer = styled('div')({
+  display: 'flex',
+  flexDirection: 'row', // Mengatur agar elemen-elemen berdampingan (horizontal)
+  alignItems: 'center', // Menyelaraskan elemen-elemen secara vertikal tengah
+  padding: '0px',
+  boxSizing: 'border-box',
+  marginBottom: '10px', // Tambahkan margin bawah sesuai kebutuhan
+  '& > div': {
+    marginRight: '250px', // Tambahkan jarak antara elemen-elemen
+  },
+});
+
+const InputContainer = styled('div')({
+  
+  
+});
+
+const StatusContainer = styled('div')(({ isEditing }) => ({
+  margin: isEditing
+    ? '-42px 0px 0px 47%'
+    : '-25px 0px 0px 47%',
+}));
+
+
+const TypeContainer = styled('div')(({ isEditing }) => ({
+  margin: isEditing
+    ? '-42px 0px 0px 90%'
+    : '-25px 0px 0px 90%',
+}));
+
+const FrameProgress = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  padding: '0px',
+  boxSizing: 'border-box',
+  margin: '0', // Menghapus margin atas yang menggeser ke atas
+  marginBottom: '20px', // Tambahkan margin bawah sesuai kebutuhan
+});
+
+const FrameStatus = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  padding: '0px',
+  boxSizing: 'border-box',
+  margin: '0', // Menghapus margin atas yang menggeser ke atas
+  marginBottom: '20px', // Tambahkan margin bawah sesuai kebutuhan
 });
 
 const FrameType = styled('div')({
-  display: `flex`,
-  position: `relative`,
-  isolation: `isolate`,
-  flexDirection: `column`,
-  justifyContent: `flex-start`,
-  alignItems: `flex-start`,
-  padding: `0px`,
-  boxSizing: `border-box`,
-  flex: `1`,
-  margin: `-80px 0px 0px 530px`,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  padding: '0px',
+  boxSizing: 'border-box',
+  margin: '0', // Menghapus margin atas yang menggeser ke atas
+  marginBottom: '20px', // Tambahkan margin bawah sesuai kebutuhan
 });
 
 const Gallery = styled("div")({
@@ -74,7 +114,7 @@ const Gallery = styled("div")({
   width: "559px",
   height: "300px",
   left: "10%",
-  top: "7%",
+  top: "10%",
   height: "80%", // Atur tinggi Gallery disini, contoh: 300px
   overflowY: "auto",
 });
@@ -237,6 +277,24 @@ const BetonBertulang = styled('div')(({ theme }) => ({
   fontFamily: `Poppins`,
   fontWeight: `400`,
   fontSize: `14px`,
+  letterSpacing: `0px`,
+  textDecoration: `none`,
+  lineHeight: `20px`,
+  textTransform: `none`,
+  opacity: `0.699999988079071`,
+  alignSelf: `stretch`,
+  margin: `4px 0px 0px 0px`,
+}));
+
+const TextContainer = styled('div')(({ theme }) => ({
+  textAlign: `left`,
+  whiteSpace: `pre-wrap`,
+  fontSynthesis: `none`,
+  color: `rgba(0, 0, 0, 1)`,
+  fontStyle: `normal`,
+  fontFamily: `Poppins`,
+  fontWeight: `400`,
+  fontSize: `16px`,
   letterSpacing: `0px`,
   textDecoration: `none`,
   lineHeight: `20px`,
@@ -872,6 +930,11 @@ const HomogeneousTile = styled('div')(({ theme }) => ({
   margin: `4px 0px 0px 0px`,
 }));
 
+const ContainerFile = styled('div')(({ theme }) => ({
+ 
+  margin: `2% 0px 0px 10%`,
+
+}));
 
 function DetailSpesifikasi(props) {
   const { isLoggedIn } = useAuth();
@@ -913,12 +976,18 @@ function DetailSpesifikasi(props) {
       status: status,
       type: type,
       images: images, // Sertakan daftar gambar saat mengirim pembaruan
-
+      
     };
 
     try {
       const updatedData = await updateHouseData(houseId, newData);
 
+      Swal.fire({
+        icon: 'success',
+        title: 'Data berhasil disimpan',
+        text: 'Data Anda telah berhasil disimpan.',
+      });
+      
       if (updatedData) {
         setIsEditing(false);
       } else {
@@ -981,39 +1050,55 @@ return (
           <div key={index} className="image-container">
             <Image src={`http://localhost:5000${image}`} loading="lazy" alt={`image ${index}`} />
             {isLoggedIn && (
-              <button onClick={() => handleDeleteImage(index)}>
+              <Button color="failure" onClick={() => handleDeleteImage(index)}>
                 Hapus
-              </button>
+              </Button>
             )}
           </div>
         ))}
       </Gallery>
-    {isLoggedIn && (
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleImageUpload}
-        disabled={!isEditing}
-      />
-    )}
-    <Frame44>
-      <SpesifikasiDetail>{`Progress`}</SpesifikasiDetail>
-      <FootPlateTelapak>
-          {isLoggedIn && isEditing ? (
-            <input
-              type="number"
-              name="progress"
-              value={progress}
-              onChange={handleProgressChange}
-            />
-          ) : (
-            `${progress} %`
+      <ContainerFile>
+          {isLoggedIn && (
+              <FileInput
+                accept="image/*"
+                name="image"
+                onChange={handleImageUpload}
+                disabled={!isEditing}
+              />
           )}
-        </FootPlateTelapak>
+      </ContainerFile>
 
-      <FrameAtas>
+    <Frame44>
+      <FrameContainer>
+        <SpesifikasiDetail>{`Progress`}</SpesifikasiDetail>
+              
+
         <SpesifikasiDetail>{`Status`}</SpesifikasiDetail>
-        {isLoggedIn && isEditing ? (
+        
+
+        <SpesifikasiDetail>{`Type`}</SpesifikasiDetail>
+        
+      </FrameContainer>
+      <InputContainer>
+          {isLoggedIn && isEditing ? (
+                    <>
+                    <TextInput
+                      type="number"
+                      name="progress"
+                      id="progress" // Sesuaikan dengan ID yang sesuai
+                      value={progress}
+                      onChange={handleProgressChange}
+                      style={{ width: '200px' }}
+
+                    />
+                  </>
+                ) : (
+                  <TextContainer>{progress} %</TextContainer>
+                )}
+        </InputContainer>
+
+        <StatusContainer isEditing={isEditing}>
+          {isLoggedIn && isEditing ? (
             <select
               name="status"
               value={status}
@@ -1023,34 +1108,34 @@ return (
               <option value="2">Sold Out</option>
             </select>
           ) : (
-            <BetonBertulang>{statusText}</BetonBertulang>
+            <TextContainer>{statusText}</TextContainer>
           )}
-      </FrameAtas>
+        </StatusContainer>
 
-      <FrameType>
-        <SpesifikasiDetail>{`Type`}</SpesifikasiDetail>
-        {isLoggedIn && isEditing ? (
-            <select
-              name="type"
-              value={type}
-              onChange={handleTypeChange}
-            >
-              <option value="1">72/60</option>
-              <option value="2">76/60</option>
-              <option value="3">90/72</option>
+        <TypeContainer isEditing={isEditing}>
+          {isLoggedIn && isEditing ? (
+              <select
+                name="type"
+                value={type}
+                onChange={handleTypeChange}
+              >
+                <option value="1">72/60</option>
+                <option value="2">76/60</option>
+                <option value="3">90/72</option>
 
-            </select>
-          ) : (
-            <BetonBertulang>{typeText}</BetonBertulang>
-          )}
-      </FrameType>
-
+              </select>
+            ) : (
+              <TextContainer>{typeText}</TextContainer>
+            )}
+        </TypeContainer>
+      <br></br>
+      
       {isLoggedIn && (
         <div>
           {isEditing ? (
-            <button onClick={handleUpdate}>Save</button>
+            <Button color="blue" onClick={handleUpdate}>Save</Button>
           ) : (
-            <button onClick={() => setIsEditing(true)}>Edit</button>
+            <Button color="blue" onClick={() => setIsEditing(true)}>Edit</Button>
           )}
         </div>
       )}

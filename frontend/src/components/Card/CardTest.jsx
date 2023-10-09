@@ -10,10 +10,12 @@ import { Link } from 'react-router-dom';
 const Card = () => {
   return (
     <div className="card-container">
-      <div className="card card-hekta">
-        <img src={ImageHekta} alt="Card Image" className="card-hekta-image" />
-        <div className="card-text">Website</div>
-      </div>
+      <a href="https://www.theviewbintaro.com/" target="_blank" rel="noopener noreferrer" className="card card-hekta">
+        <div>
+          <img src={ImageHekta} alt="Card Image" className="card-hekta-image" />
+          <div className="card-text">Website</div>
+        </div>
+      </a>
 
       <Link to="/siteplan" className="card card-siteplan">
         <div>
@@ -22,15 +24,19 @@ const Card = () => {
         </div>
       </Link>
 
-      <div className="card card-vr">
-        <img src={VrLogo} alt="Card Image" className="card-image" />
-        <div className="card-text">3D Virtual</div>
-      </div>
+      <a href="https://theview.co.id/theviewvirtual/" target="_blank" rel="noopener noreferrer" className="card card-vr">
+        <div >
+          <img src={VrLogo} alt="Card Image" className="card-image" />
+          <div className="card-text">3D Virtual</div>
+        </div>
+      </a>
 
-      <div className="card card-youtube">
-        <img src={YoutubeLogo} alt="Card Image" className="card-image" />
-        <div className="card-text">Youtube</div>
-      </div>
+      <a href="https://www.youtube.com/@hektakarya9516" target="_blank" rel="noopener noreferrer" className="card card-youtube">
+        <div>
+          <img src={YoutubeLogo} alt="Card Image" className="card-image" />
+          <div className="card-text">Youtube</div>
+        </div>
+      </a>
     </div>
   );
 }

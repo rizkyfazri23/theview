@@ -4,6 +4,8 @@ import logoImage from 'src/assets/images/Login_image_2.png';
 import { loginUser } from './../../api/api.js';
 import { useNavigate } from 'react-router-dom'; // Gunakan useNavigate
 import { useAuth } from './../../AuthContext'; // Import useAuth dari AuthContext
+import Swal from 'sweetalert2';
+
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -15,7 +17,10 @@ function Login() {
     e.preventDefault();
 
     if (!username || !password) {
-      alert('Please fill in both username and password.');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Please fill in both username and password.',
+      });
       return;
     }
 
@@ -28,10 +33,16 @@ function Login() {
       // Simpan token autentikasi ke localStorage
       localStorage.setItem('authToken', loginResult.token);
 
-      alert('Login successful!');
+      Swal.fire({
+        icon: 'success',
+        title: 'Login successful!',
+      });
       navigate('/'); // Menggunakan navigate untuk mengarahkan pengguna ke halaman "/"
     } else {
-      alert('Login failed. Please check your credentials.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Login failed. Please check your credentials.',
+      });
     }
   };
 

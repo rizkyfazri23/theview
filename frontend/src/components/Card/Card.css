@@ -4,7 +4,7 @@
   flex-wrap: wrap; /* Menambahkan flex-wrap untuk responsif */
   padding: 0 10px; /* Menambahkan padding agar tampilan lebih baik di perangkat kecil */
   max-width: 1200px;
-  margin: 250px auto; /* Mengatur margin ke tengah secara horizontal (kiri dan kanan) dan vertical (atas dan bawah) */
+  margin: 150px auto; /* Mengatur margin ke tengah secara horizontal (kiri dan kanan) dan vertical (atas dan bawah) */
 }
 
 
@@ -16,7 +16,7 @@
   border: 1px solid white;
   box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
   backdrop-filter: blur(6px);
-  border-radius: 17px;
+  border-radius: 20px;
   text-align: center;
   cursor: pointer;
   transition: all 0.5s;

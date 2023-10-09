@@ -164,30 +164,6 @@ const Frame38 = styled('div')({
   margin: `14px 0px 0px 0px`,
 });
 
-const MdiCheckboxBlankOutl = styled('div')({
-  opacity: `0.5`,
-  display: `flex`,
-  position: `relative`,
-  isolation: `isolate`,
-  flexDirection: `row`,
-  justifyContent: `flex-start`,
-  alignItems: `flex-start`,
-  padding: `0px`,
-  boxSizing: `border-box`,
-  width: `20px`,
-  height: `20px`,
-  margin: `0px`,
-  overflow: `hidden`,
-});
-
-const Vector2 = styled('img')({
-  height: `15px`,
-  width: `15px`,
-  position: `absolute`,
-  left: `3px`,
-  top: `3px`,
-});
-
 const Q9072 = styled('div')(({ theme }) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
@@ -217,8 +193,7 @@ const Frame37 = styled('div')({
   margin: `14px 0px 0px 0px`,
 });
 
-const MdiCheckboxBlankOutl1 = styled('div')({
-  opacity: `0.5`,
+const Frame36 = styled('div')({
   display: `flex`,
   position: `relative`,
   isolation: `isolate`,
@@ -227,19 +202,25 @@ const MdiCheckboxBlankOutl1 = styled('div')({
   alignItems: `flex-start`,
   padding: `0px`,
   boxSizing: `border-box`,
-  width: `20px`,
-  height: `20px`,
-  margin: `0px`,
-  overflow: `hidden`,
+  alignSelf: `stretch`,
+  margin: `14px 0px 0px 0px`,
 });
 
-const Vector3 = styled('img')({
-  height: `15px`,
-  width: `15px`,
-  position: `absolute`,
-  left: `3px`,
-  top: `3px`,
-});
+const Q7660 = styled('div')(({ theme }) => ({
+  textAlign: `left`,
+  whiteSpace: `pre-wrap`,
+  fontSynthesis: `none`,
+  color: `rgba(0, 0, 0, 1)`,
+  fontStyle: `normal`,
+  fontFamily: `Poppins`,
+  fontWeight: `400`,
+  fontSize: `14px`,
+  letterSpacing: `0px`,
+  textDecoration: `none`,
+  lineHeight: `20px`,
+  textTransform: `none`,
+  margin: `0px 0px 0px 8px`,
+}));
 
 const Q7260 = styled('div')(({ theme }) => ({
   textAlign: `left`,
@@ -1049,6 +1030,9 @@ const Sidebar = ({ setIsApplyFilter, setFilterData }) => {
   const [filter0to40, setFilter0to40] = useState(false);
   const [filterAvailable, setFilterAvailable] = useState(false);
   const [filterSoldOut, setFilterSoldOut] = useState(false);
+  const [filter9072, setFilter9072] = useState(false);
+  const [filter7660, setFilter7660] = useState(false);
+  const [filter7260, setFilter7260] = useState(false);
 
   const handleFilterChange = (filterName) => {
     // Handle progress filter
@@ -1079,6 +1063,24 @@ const Sidebar = ({ setIsApplyFilter, setFilterData }) => {
       setFilterAvailable(false);
       setFilterSoldOut(!filterSoldOut);
     }
+
+      // Handle Type filter
+    if (filterName === '9072') {
+      console.log('Filter 90/72:', !filter9072);
+      setFilter9072(!filter9072);
+      setFilter7660(false);
+      setFilter7260(false);
+    } else if (filterName === '7660') {
+      console.log('Filter 76/60:', !filter7660);
+      setFilter9072(false);
+      setFilter7660(!filter7660);
+      setFilter7260(false);
+    } else if (filterName === '7260') {
+      console.log('Filter 72/60:', !filter7260);
+      setFilter9072(false);
+      setFilter7660(false);
+      setFilter7260(!filter7260);
+    }
   }
 
   // Fungsi untuk mereset checkbox filter
@@ -1088,6 +1090,9 @@ const Sidebar = ({ setIsApplyFilter, setFilterData }) => {
     setFilter81to100(false);
     setFilter41to80(false);
     setFilter0to40(false);
+    setFilter9072(false); // Tambahkan reset untuk filter Type
+    setFilter7660(false);
+    setFilter7260(false);
 
     handleApplyFilter();
   };
@@ -1101,6 +1106,9 @@ const Sidebar = ({ setIsApplyFilter, setFilterData }) => {
       filter0to40,
       filterAvailable,
       filterSoldOut,
+      filter9072,
+      filter7660,
+      filter7260,
     };
 
     // Call the functions above (e.g., setIsApplyFilter) to send the active filters
@@ -1112,7 +1120,7 @@ const Sidebar = ({ setIsApplyFilter, setFilterData }) => {
   useEffect(() => {
     // Panggil handleApplyFilter setiap kali ada perubahan pada status filter
     handleApplyFilter();
-  }, [filterAvailable, filterSoldOut, filter81to100, filter41to80, filter0to40]);
+  }, [filterAvailable, filterSoldOut, filter81to100, filter41to80, filter0to40, filter9072, filter7660, filter7260]);
 
 
 
@@ -1133,20 +1141,42 @@ const Sidebar = ({ setIsApplyFilter, setFilterData }) => {
       </Frame47>
       <Frame38>
         <label>
-            <input type="checkbox" className="input" />
-            <span className="custom-checkbox"></span>
+          <input
+            type="checkbox"
+            className="input"
+            checked={filter9072}
+            onChange={() => handleFilterChange('9072')}
+          />
+          <span className="custom-checkbox"></span>
         </label>
         <Q9072>{`90/72`}</Q9072>
       </Frame38>
       <Frame37>
         <label>
-            <input type="checkbox" className="input" />
-            <span className="custom-checkbox"></span>
+          <input
+            type="checkbox"
+            className="input"
+            checked={filter7660}
+            onChange={() => handleFilterChange('7660')}
+          />
+          <span className="custom-checkbox"></span>
+        </label>
+        <Q7660>{`76/60`}</Q7660>
+      </Frame37>
+      <Frame36>
+        <label>
+          <input
+            type="checkbox"
+            className="input"
+            checked={filter7260}
+            onChange={() => handleFilterChange('7260')}
+          />
+          <span className="custom-checkbox"></span>
         </label>
         <Q7260>{`72/60`}</Q7260>
-      </Frame37>
+      </Frame36>
       <Line4></Line4>
-      <Frame48>
+      {/* <Frame48>
         <KeyPlan>{`Key Plan`}</KeyPlan>
         <MdiChevronUp1>
           <Vector4 src={Vector4Image} loading="lazy" alt={'Vector'} />
@@ -1187,7 +1217,7 @@ const Sidebar = ({ setIsApplyFilter, setFilterData }) => {
         </label>
         <MiniLake>{`Mini Lake`}</MiniLake>
       </Frame42>
-      <Line5></Line5>
+      <Line5></Line5> */}
       <Frame49>
         <Status>{`Status`}</Status>
         <MdiChevronUp2>
@@ -1263,7 +1293,7 @@ const Sidebar = ({ setIsApplyFilter, setFilterData }) => {
       </Frame52>
       <Frame2>
         <ButtonReset onClick={handleResetFilter}>Reset</ButtonReset>
-        <ButtonApply onClick={handleApplyFilter}>Apply Filter</ButtonApply>
+        {/* <ButtonApply onClick={handleApplyFilter}>Apply Filter</ButtonApply> */}
       </Frame2>
     </FloatingSidebar>
   );

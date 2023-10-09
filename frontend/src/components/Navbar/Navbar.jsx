@@ -5,9 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faUnlock } from '@fortawesome/free-solid-svg-icons'; // Tambahkan icon untuk logout
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './../../AuthContext';
+import VectorImage from 'src/assets/images/navbar_Vector.png';
+
+
+
 
 
 const Navbar = ({ isNotDashboard }) => {
+  
   const navigate = useNavigate();
   const { isLoggedIn, setIsLoggedIn } = useAuth(); // Destructure isLoggedIn dan setIsLoggedIn dari useAuth()
 
@@ -27,17 +32,25 @@ const Navbar = ({ isNotDashboard }) => {
 
   return (
     <div className={`${styles.navbar} ${isNotDashboard ? styles.navbarSiteplan : ''}`}>
+      {isNotDashboard ? (
+        <div className={styles.icRoundArrowBack} onClick={() => navigate(-1)}>
+          <div className={styles.arrow}></div>
+        </div>
+      ) : (
+        ''
+      )}
+      
       <div className={styles.frame5}>
         <img src={TheViewImage} className={styles.theView} alt="The View" />
         <div className={styles.byHektaKarya}>by Hekta Karya</div>
       </div>
       <div className={styles.frame4}></div>
-      <div className={styles.frame3}>
+      {/* <div className={styles.frame3}>
         <div className={styles.beranda}>Beranda</div>
         <div className={styles.siteplan}>Siteplan</div>
         <div className={styles.q3dVirtual}>3D Virtual</div>
         <div className={styles.about}>About</div>
-      </div>
+      </div> */}
       <div className={styles.frame2}>
         <button className={styles.buttonLogin} onClick={handleLoginClick}>
           <FontAwesomeIcon icon={isLoggedIn ? faUnlock : faLock} className={styles.lockIcon} />

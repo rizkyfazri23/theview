@@ -22,7 +22,10 @@ export const getAllHouses = async (req, res) => {
       filter41to80,
       filter0to40,
       filterAvailable,
-      filterSoldOut
+      filterSoldOut,
+      filter9072, // Tambahkan filter Type 90/72
+      filter7660, // Tambahkan filter Type 76/60
+      filter7260, // Tambahkan filter Type 72/60
     } = req.query;
     let filter = {};
 
@@ -43,6 +46,17 @@ export const getAllHouses = async (req, res) => {
     }
     if (filterSoldOut === 'true') {
       filter.status = 2; // Filter rumah yang sudah habis
+    }
+
+    // Menambahkan filter berdasarkan Type yang dipilih
+    if (filter9072 === 'true') {
+      filter.type = 3;
+    }
+    if (filter7660 === 'true') {
+      filter.type = 2;
+    }
+    if (filter7260 === 'true') {
+      filter.type = 1;
     }
 
     const houses = await House.find(filter);

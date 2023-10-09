@@ -63,7 +63,7 @@
   font-weight: bold;
   font-size: 1em; /* Ukuran teks tombol lebih besar */
   text-transform: uppercase;
-  padding: 1em 8em; /* Ubah padding untuk membuat tombol lebih besar */
+  padding: 1em 6.5em; /* Ubah padding untuk membuat tombol lebih besar */
   background-color: #ffeba7;
   color: #5e6681;
   box-shadow: 0 8px 24px 0 rgb(255 235 167 / 20%);
