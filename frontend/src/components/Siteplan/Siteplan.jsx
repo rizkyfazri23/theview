@@ -29,6 +29,10 @@ const Siteplan = ({ isApplyFilter, filterData }) => {
         filter9072: filterData.filter9072, // Tambahkan filter Type 90/72
         filter7660: filterData.filter7660, // Tambahkan filter Type 76/60
         filter7260: filterData.filter7260, // Tambahkan filter Type 72/60
+        filterPhase1: filterData.filterPhase1,
+        filterPhase2: filterData.filterPhase2,
+        filterPhase3: filterData.filterPhase3,
+
       };
   
       console.log('Query Parameters:', queryParams);

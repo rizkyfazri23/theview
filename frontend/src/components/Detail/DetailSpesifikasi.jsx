@@ -1008,11 +1008,11 @@ function DetailSpesifikasi(props) {
   console.log(type);
   let typeText = '';
   if (type === 1) {
-    typeText = '72/60';
+    typeText = 'LB 90';
   } else if (type === 2) {
-    typeText = '76/60';
+    typeText = 'LB 76';
   } else if (type === 3) {
-    typeText = '90/72';
+    typeText = 'LB 72';
   }
 // Fungsi untuk mengunggah gambar
 const handleImageUpload = async (e) => {
@@ -1113,7 +1113,7 @@ return (
         </StatusContainer>
 
         <TypeContainer isEditing={isEditing}>
-          {isLoggedIn && isEditing ? (
+          {/* {isLoggedIn && isEditing ? (
               <select
                 name="type"
                 value={type}
@@ -1124,9 +1124,9 @@ return (
                 <option value="3">90/72</option>
 
               </select>
-            ) : (
+            ) : ( */}
               <TextContainer>{typeText}</TextContainer>
-            )}
+            {/* )} */}
         </TypeContainer>
       <br></br>
       

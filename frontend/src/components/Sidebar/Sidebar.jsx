@@ -969,7 +969,7 @@ const FloatingSidebar = styled('div')({
   borderRadius: '4px',
   padding: '16px',
   width: '15%', // Mengatur lebar sidebar menjadi 20% dari lebar viewport
-  height: '80%', // Mengatur tinggi sidebar menjadi 80% dari tinggi viewport
+  height: '85%', // Mengatur tinggi sidebar menjadi 80% dari tinggi viewport
 
   '@media (max-width: 768px)': {
     // Mengubah posisi sidebar saat lebar layar <= 768px
@@ -1033,6 +1033,10 @@ const Sidebar = ({ setIsApplyFilter, setFilterData }) => {
   const [filter9072, setFilter9072] = useState(false);
   const [filter7660, setFilter7660] = useState(false);
   const [filter7260, setFilter7260] = useState(false);
+  const [filterPhase1, setFilterPhase1] = useState(false);
+  const [filterPhase2, setFilterPhase2] = useState(false);
+  const [filterPhase3, setFilterPhase3] = useState(false);
+  
 
   const handleFilterChange = (filterName) => {
     // Handle progress filter
@@ -1081,6 +1085,24 @@ const Sidebar = ({ setIsApplyFilter, setFilterData }) => {
       setFilter7660(false);
       setFilter7260(!filter7260);
     }
+
+    // Handle Phase filter
+    if (filterName === 'phase1') {
+      console.log('Filter Phase 1:', !filterPhase1);
+      setFilterPhase1(!filterPhase1);
+      setFilterPhase2(false);
+      setFilterPhase3(false);
+    } else if (filterName === 'phase2') {
+      console.log('Filter Phase 2:', !filterPhase2);
+      setFilterPhase1(false);
+      setFilterPhase2(!filterPhase2);
+      setFilterPhase3(false);
+    } else if (filterName === 'phase3') {
+      console.log('Filter Phase 3:', !filterPhase3);
+      setFilterPhase1(false);
+      setFilterPhase2(false);
+      setFilterPhase3(!filterPhase3);
+    }
   }
 
   // Fungsi untuk mereset checkbox filter
@@ -1093,6 +1115,9 @@ const Sidebar = ({ setIsApplyFilter, setFilterData }) => {
     setFilter9072(false); // Tambahkan reset untuk filter Type
     setFilter7660(false);
     setFilter7260(false);
+    setFilterPhase1(false);
+    setFilterPhase2(false);
+    setFilterPhase3(false);
 
     handleApplyFilter();
   };
@@ -1109,6 +1134,9 @@ const Sidebar = ({ setIsApplyFilter, setFilterData }) => {
       filter9072,
       filter7660,
       filter7260,
+      filterPhase1,
+      filterPhase2,
+      filterPhase3,
     };
 
     // Call the functions above (e.g., setIsApplyFilter) to send the active filters
@@ -1120,7 +1148,17 @@ const Sidebar = ({ setIsApplyFilter, setFilterData }) => {
   useEffect(() => {
     // Panggil handleApplyFilter setiap kali ada perubahan pada status filter
     handleApplyFilter();
-  }, [filterAvailable, filterSoldOut, filter81to100, filter41to80, filter0to40, filter9072, filter7660, filter7260]);
+  }, [filterAvailable, 
+      filterSoldOut, 
+      filter81to100, 
+      filter41to80, 
+      filter0to40, 
+      filter9072, 
+      filter7660, 
+      filter7260, 
+      filterPhase1, 
+      filterPhase2, 
+      filterPhase3]);
 
 
 
@@ -1149,7 +1187,7 @@ const Sidebar = ({ setIsApplyFilter, setFilterData }) => {
           />
           <span className="custom-checkbox"></span>
         </label>
-        <Q9072>{`90/72`}</Q9072>
+        <Q9072>{`LB 90`}</Q9072>
       </Frame38>
       <Frame37>
         <label>
@@ -1161,7 +1199,7 @@ const Sidebar = ({ setIsApplyFilter, setFilterData }) => {
           />
           <span className="custom-checkbox"></span>
         </label>
-        <Q7660>{`76/60`}</Q7660>
+        <Q7660>{`LB 76`}</Q7660>
       </Frame37>
       <Frame36>
         <label>
@@ -1173,7 +1211,7 @@ const Sidebar = ({ setIsApplyFilter, setFilterData }) => {
           />
           <span className="custom-checkbox"></span>
         </label>
-        <Q7260>{`72/60`}</Q7260>
+        <Q7260>{`LB 72`}</Q7260>
       </Frame36>
       <Line4></Line4>
       {/* <Frame48>
@@ -1290,6 +1328,49 @@ const Sidebar = ({ setIsApplyFilter, setFilterData }) => {
           <span className="custom-checkbox"></span>
         </label>
         <Q040>{`0-40%`}</Q040>
+      </Frame52>
+      <Line7></Line7>
+      <Frame50>
+        <Progress>{`Phase`}</Progress>
+        <MdiChevronUp3>
+          <Vector13 src={Vector13Image} loading="lazy" alt={'Vector'} />
+        </MdiChevronUp3>
+      </Frame50>
+      <Frame51>
+        <label>
+          <input
+            type="checkbox"
+            className="input"
+            checked={filterPhase1}
+            onChange={() => handleFilterChange('phase1')}
+          />
+          <span className="custom-checkbox"></span>
+        </label>
+        <Q81100>{`Phase 1`}</Q81100>
+      </Frame51>
+      <Frame53>
+        <label>
+          <input
+            type="checkbox"
+            className="input"
+            checked={filterPhase2}
+            onChange={() => handleFilterChange('phase2')}
+          />
+          <span className="custom-checkbox"></span>
+        </label>  
+        <Q4180>{`Phase 2`}</Q4180>
+      </Frame53>
+      <Frame52>
+        <label>
+          <input
+            type="checkbox"
+            className="input"
+            checked={filterPhase3}
+            onChange={() => handleFilterChange('phase3')}
+          />
+          <span className="custom-checkbox"></span>
+        </label>
+        <Q040>{`Phase 3`}</Q040>
       </Frame52>
       <Frame2>
         <ButtonReset onClick={handleResetFilter}>Reset</ButtonReset>

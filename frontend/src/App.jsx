@@ -16,7 +16,6 @@ import './components/Loader/Loader.css';
 import './components/Homepage/Homepage.css';
 import { LoadingProvider, useLoading } from './LoadingContext';
 
-
 const HomePage = () => {
   return (
     <div>

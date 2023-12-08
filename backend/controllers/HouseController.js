@@ -26,6 +26,9 @@ export const getAllHouses = async (req, res) => {
       filter9072, // Tambahkan filter Type 90/72
       filter7660, // Tambahkan filter Type 76/60
       filter7260, // Tambahkan filter Type 72/60
+      filterPhase1,
+      filterPhase2,
+      filterPhase3,
     } = req.query;
     let filter = {};
 
@@ -57,6 +60,16 @@ export const getAllHouses = async (req, res) => {
     }
     if (filter7260 === 'true') {
       filter.type = 1;
+    }
+
+    if (filterPhase1 === 'true') {
+      filter.phase = 1;
+    }
+    if (filterPhase2 === 'true') {
+      filter.phase = 2;
+    }
+    if (filterPhase3 === 'true') {
+      filter.phase = 3;
     }
 
     const houses = await House.find(filter);
